@@ -2,7 +2,7 @@
 class Personaje:
 
     #atributos del personaje
-    
+
     especie = "Humano"
     nombre = "Dom"
     altura = 1.85
@@ -11,9 +11,9 @@ class Personaje:
 
     def correr(self, status):
         if(status):
-            print("El personaje "+ self.nombre + "ésta corriendo.")
+            print("El personaje "+ self.nombre + " ésta corriendo.")
         else:
-            print("El personaje "+ self.nombre + "se detuvo.")
+            print("El personaje "+ self.nombre + " se detuvo.")
     
     def lanzarGranada(self):
         print("Se lanzó granada ")
@@ -21,4 +21,4 @@ class Personaje:
     def recargarArma(self, municiones):
         cargador = 5
         cargador = cargador + municiones
-        print("El arma tiene ahora "+ cargador + "balas")
+        print("El arma tiene ahora "+ str(cargador) + " balas")
