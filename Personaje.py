@@ -1,11 +1,10 @@
 
 class Personaje:
-
-    #atributos del personaje
-
-    especie = "Humano"
-    nombre = "Dom"
-    altura = 1.85
+    
+    def __init__(self, esp, nom, alt):
+        self.especie = esp
+        self.nombre = nom
+        self.altura = alt
 
     #Metodos del personaje
 
