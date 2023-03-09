@@ -1,50 +1,51 @@
 
-from tkinter import Tk, Frame, Button, messagebox
+from tkinter import *
+import string
+import random
 
-def mostrarMensaje():
-    messagebox.showinfo("Aviso", "Este mensaje es para avisar algo")
-    messagebox.showerror("Es un mensaje de error: ","Todo falló con éxito")
-    print (messagebox.askokcancel("Pregunta: ","¿El jugó con tu corazón?"))
-    #print (messagebox.askquestion(""))
-    #print (messagebox.askretrycancel(""))
-    #print (messagebox.askyesno(""))
-    #print (messagebox.askyesnocancel(""))
+def generator():
+    small_alphabets=string.ascii_lowercase
+    capital_alphabets=string.ascii_uppercase
+    numbers=string.digits
+    special_charecters=string.punctuation
 
-#Función para agrefar botones
+    all=small_alphabets+capital_alphabets+numbers+special_charecters
+    password_length=int(length_Box.get())
 
-def agregarBoton():
-    botonblanco.config(text = "+",bg="orange",fg="black")
-    botonNuevo = Button(seccion3, text = "Botón Nuevo")
-    botonNuevo.pack()
+    if choice.get()==1:
+        passwordField.insert(0,random.sample(small_alphabets,password_length))
 
-#Creación ventana
+    if choice.get()==2:
+        passwordField.insert(0,random.sample(small_alphabets+capital_alphabets,password_length))
 
-ventana = Tk()
-ventana.title(" Practica 11: Frames ")
-ventana.geometry("600x400")
+    if choice.get()==3:
+        passwordField.insert(0,random.sample(all,password_length))
 
-#Definir secciones de la ventana
-seccion1 = Frame(ventana, bg = "#cc0000")
-seccion1.pack(expand = True, fill = 'both')
+root=Tk()
+root.config(bg='gray20')
+choice=IntVar()
+Font=('arial',13,'bold')
+passwordLabel=Label(root,text='Password Generator',font=('times new roman',20,'bold'),bg='gray20',fg='white')
+passwordLabel.grid(pady=10)
+weakradioButton=Radiobutton(root,text='Débil',value=1,variable=choice,font=Font)
+weakradioButton.grid(pady=5)
 
-seccion2 = Frame(ventana, bg = "#ff9900")
-seccion2.pack(expand = True, fill = 'both')
+mediumradioButton=Radiobutton(root,text='Media',value=2,variable=choice,font=Font)
+mediumradioButton.grid(pady=5)
 
-seccion3 = Frame(ventana, bg = "#000000")
-seccion3.pack(expand = True, fill = 'both') 
+strongradioButton=Radiobutton(root,text='Fuerte',value=3,variable=choice,font=Font)
+strongradioButton.grid(pady=5)
 
-#Botones
-botonAzul = Button(seccion1, text = "Botón Azul", bg = "#f2f2f2", command = mostrarMensaje)
-botonAzul.place(x=60, y=60)
+lengthLabel=Label(root,text='Password Length',font=Font,bg='gray20',fg='white')
+lengthLabel.grid(pady=5)
 
-botonAmarillo = Button(seccion2, text = "Botón Amarillo", bg = "#f2f2f2")
-botonAmarillo.grid(row=0,column=0)
+length_Box=Spinbox(root,from_=5,to_=18,width=5,font=Font)
+length_Box.grid(pady=5)
 
-botonNegro = Button(seccion2, text = "Botón Negro", bg = "#f2f2f2")
-botonNegro.grid(row=0,column=1)
+generateButton=Button(root,text='Generate',font=Font,command=generator)
+generateButton.grid(pady=5)
 
-botonblanco = Button(seccion3, text = "Botón blanco", bg = "#f2f2f2", command = agregarBoton)
-botonblanco.pack()
+passwordField=Entry(root,width=25,bd=2,font=Font)
+passwordField.grid()
 
-#Main de ejecución de ventana
-ventana.mainloop()
+root.mainloop()

@@ -1,0 +1,36 @@
+import tkinter as tk
+from tkinter import ttk
+
+class TiendaGUI:
+    def __init__(self, master):
+        self.master = master
+        master.title("Tienda")
+
+        # Etiqueta de bienvenida
+        self.label = tk.Label(master, text="Bienvenido a la tienda!")
+        self.label.pack()
+
+        # Botones para las opciones de la tienda
+        boton_productos = ttk.Combobox(master, width=17)
+        boton_productos.pack()
+        productos = ["Coca","Galletas","Pan", "Leche","Papas","Queso"]
+        boton_productos ['values'] = productos
+
+        self.boton_comprar = tk.Button(master, text="Comprar", command=self.comprar)
+        self.boton_comprar.pack()
+
+        self.boton_salir = tk.Button(master, text="Salir", command=master.quit)
+        self.boton_salir.pack()
+
+    def ver_productos(self):
+        # Acción al presionar el botón "Ver productos"
+        print("Mostrando lista de productos")
+
+    def comprar(self):
+        # Acción al presionar el botón "Comprar"
+        print("Comprando producto")
+
+root = tk.Tk()
+tienda_gui = TiendaGUI (root)
+root.mainloop()
+ 

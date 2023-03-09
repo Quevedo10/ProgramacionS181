@@ -1,14 +1,16 @@
 
-from PracticaLogin import *
+class Usuario:
+     def _init_(self, email, password):
+         self.email = email
+         self.password = password
 
-def validar_login():
-    usuario = entry_usuario.get()
-    contraseña = entry_contraseña.get()
-    
-    # Aquí iría la validación del usuario y contraseña
-    
-    if usuario == 'upq.com' and contraseña == 'upq123':
-        label_resultado.config(text="¡Bienvenido!")
-    else:
-        label_resultado.config(text="Por favor, revise sus datos")
+def login(email_input, password_input):
+     usuario = Usuario("antoniogtzv", "jano")
+     if email_input == usuario.email and password_input == usuario.password:
+         mensaje = "¡Inicio de sesión exitoso!"
+         exitoso = True
+     else:
+         mensaje = "Correo o contraseña incorrectos. Intente nuevamente."
+         exitoso = False
+     return mensaje, exitoso
 
