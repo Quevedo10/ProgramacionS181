@@ -1,4 +1,6 @@
 import tkinter as tk
+from tkinter import messagebox
+import random
 
 # Definir la función para generar la matrícula
 def generar_matricula():
@@ -62,5 +64,6 @@ generar_matricula_button.pack()
 matricula_label = tk.Label(ventana, text="")
 matricula_label.pack()
 
+messagebox.showinfo("Tu matricula es: " + matricula_label)
 # Ejecutar la ventana principal
 ventana.mainloop()

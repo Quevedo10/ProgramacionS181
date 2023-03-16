@@ -59,6 +59,6 @@ class TiendaGUI:
         self.actualizar_lista()
         self.ventana.mainloop()
 
-if __name__ == "_main_":
+if _name_ == "_main_":
     tienda = TiendaGUI()
     tienda.iniciar()
