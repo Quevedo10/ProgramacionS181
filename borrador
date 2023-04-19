@@ -1,0 +1,59 @@
+import sqlite3
+from tkinter import *
+
+# Crear una conexión a la base de datos
+conn = sqlite3.connect('mi_base_de_datos.db')
+
+# Crear una tabla en la base de datos
+conn.execute('''CREATE TABLE IF NOT EXISTS usuarios
+             (ID INT PRIMARY KEY NOT NULL,
+             NOMBRE TEXT NOT NULL,
+             EDAD INT NOT NULL);''')
+
+# Crear la ventana de la interfaz gráfica
+ventana = Tk()
+ventana.title("Mi aplicación")
+ventana.geometry("400x400")
+
+# Crear un formulario para agregar usuarios
+nombre_label = Label(ventana, text="Nombre:")
+nombre_label.pack()
+nombre_entry = Entry(ventana)
+nombre_entry.pack()
+
+edad_label = Label(ventana, text="Edad:")
+edad_label.pack()
+edad_entry = Entry(ventana)
+edad_entry.pack()
+
+def agregar_usuario():
+    # Obtener los valores del formulario
+    nombre = nombre_entry.get()
+    edad = int(edad_entry.get())
+
+    # Agregar el usuario a la base de datos
+    conn.execute(f"INSERT INTO usuarios (ID, NOMBRE, EDAD) VALUES (null, '{nombre}', {edad})")
+    conn.commit()
+
+    # Limpiar el formulario
+    nombre_entry.delete(0, END)
+    edad_entry.delete(0, END)
+
+# Crear un botón para agregar usuarios
+agregar_btn = Button(ventana, text="Agregar usuario", command=agregar_usuario)
+agregar_btn.pack()
+
+# Mostrar los usuarios en una lista
+usuarios_listbox = Listbox(ventana)
+usuarios_listbox.pack()
+
+# Obtener los usuarios de la base de datos
+cursor = conn.execute("SELECT NOMBRE, EDAD FROM usuarios")
+for row in cursor:
+    usuarios_listbox.insert(END, f"{row[0]}, {row[1]} años")
+
+# Cerrar la conexión a la base de datos
+conn.close()
+
+# Iniciar la aplicación
+ventana.mainloop()
