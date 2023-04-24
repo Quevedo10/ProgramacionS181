@@ -1,6 +1,6 @@
 import tkinter as tk
-from interfaz import numRomanoUI
+from interfaz import Interfaz
 
-ventana = tk.Tk()
-app = numRomanoUI(ventana)
-ventana.mainloop()
+root = tk.Tk()
+app = Interfaz(root)
+root.mainloop()

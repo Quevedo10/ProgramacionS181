@@ -1,33 +1,32 @@
 import tkinter as tk
-from logica import numRomano
+from logica import logica
 from tkinter import messagebox
 
-class numRomanoUI:
-    def __init__(self, num):
-        self.num = num
-        self.num.title("Conversor de números romanos")
-        self.convertidor = numRomano()
+class logicaGUI:
 
-        self.ingresar_label = tk.Label(self.num, text="Ingrese número romano o arábigo (1-50): ")
-        self.ingresar_label.pack()
+    def __init__(self, interfaz):
+        self.interfaz = interfaz
+        interfaz.title("Conversiones")
 
-        self.ingresar_entry = tk.Entry(self.num)
-        self.ingresar_entry.pack()
+        self.convertidor = logica()
 
-        self.convert_boton = tk.Button(self.num, text="Convertir", command=self.convert)
-        self.convert_boton.pack()
+        self.label = tk.Label(interfaz, text="Ingresa número Arabigo o Romano (1-50):")
+        self.label.pack()
+
+        self.entry = tk.Entry(interfaz)
+        self.entry.pack()
+
+        self.boton = tk.Button(interfaz, text="Convertir", command=self.convert)
+        self.boton.pack()
 
     def convert(self):
-        ingresar_value = self.ingresar_entry.get()
+        ingresar_value = self.entry.get()
         try:
-            ingresar_value = int(ingresar_value)
-            if ingresar_value > 50:
-                raise ValueError("El número arábigo es mayor que 50")
-            result = self.convertidor.romanoConvertido(ingresar_value)
-        except ValueError:
-            result = self.convertidor.arabigo(ingresar_value)
+            output_value = self.convertidor.convert(ingresar_value)
+            tk.messagebox.showinfo("Resultado de la conversión: ", f"{ingresar_value} = {output_value}")
+        except ValueError as e:
+            tk.messagebox.showerror("Error de conversión", str(e))
 
-        if result is None:
-            messagebox.showerror(title="Error", message=f"El número romano '{ingresar_value}' no existe.")
-        else:
-            messagebox.showinfo(title="Resultado", message=result)
+ventana = tk.Tk()
+gui = logicaGUI(ventana)
+ventana.mainloop()
